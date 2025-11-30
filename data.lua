@@ -38,18 +38,21 @@ data:extend({
 		},
 		enabled = false,
 		ingredients = {
-			{ type = "item", name = "steel-plate", amount = 10 },
+			{ type = "item", name = "water-barrel", amount = 2 },
 			{ type = "item", name = "refined-concrete", amount = 10 },
-			{ type = "item", name = "uranium-238", amount = 3 },
+			{ type = "item", name = "uranium-235", amount = 1 },
 		},
 		energy_required = 10,
-		results = { { type = "item", name = "nuclear-science-pack", amount = 1 } },
+		results = {
+			{ type = "item", name = "nuclear-science-pack", amount = 2 },
+			{ type = "item", name = "barrel", amount = 2, ignored_by_stats = 2, ignored_by_productivity = 2 },
+		},
+		main_product = "nuclear-science-pack",
 		allow_productivity = true,
 	},
 })
 table.insert(data.raw["lab"]["lab"].inputs, "nuclear-science-pack")
 table.insert(data.raw["lab"]["biolab"].inputs, "nuclear-science-pack")
-
 table.insert(data.raw.technology["biolab"].unit.ingredients, { "nuclear-science-pack", 1 })
 table.insert(data.raw.technology["kovarex-enrichment-process"].unit.ingredients, { "nuclear-science-pack", 1 })
 table.insert(data.raw.technology["nuclear-power"].unit.ingredients, { "nuclear-science-pack", 1 })
@@ -59,6 +62,13 @@ table.insert(data.raw.technology["captive-biter-spawner"].unit.ingredients, { "n
 table.insert(data.raw.technology["fission-reactor-equipment"].unit.ingredients, { "nuclear-science-pack", 1 })
 table.insert(data.raw.technology["nuclear-fuel-reprocessing"].unit.ingredients, { "nuclear-science-pack", 1 })
 table.insert(data.raw.technology["fusion-reactor-equipment"].unit.ingredients, { "nuclear-science-pack", 1 })
+table.insert(data.raw.technology["research-productivity"].unit.ingredients, { "nuclear-science-pack", 1 })
+data.raw.technology["kovarex-enrichment-process"].unit = nil
+data.raw.technology["kovarex-enrichment-process"].research_trigger = {
+	type = "craft-item",
+	item = "uranium-235",
+	count = 50,
+}
 table.insert(
 	data.raw.technology["uranium-processing"].effects,
 	{ type = "unlock-recipe", recipe = "nuclear-science-pack" }
@@ -82,7 +92,7 @@ add_centrifuging_recipe("biolab")
 add_centrifuging_recipe("fusion-reactor-equipment")
 data.raw["assembling-machine"]["centrifuge"].module_slots = 4
 data.raw["assembling-machine"]["centrifuge"].effect_receiver = { base_effect = { productivity = 0.5 } }
-
+data.raw["assembling-machine"]["centrifuge"].weight = 200 * kg
 -- make lignumis inserter and belt equal to the
 --
 --if settings.startup["ltdi-wood-and-iron-belts-are-equal"].value then
