@@ -39,7 +39,7 @@ data:extend({
 		enabled = false,
 		ingredients = {
 			{ type = "item", name = "water-barrel", amount = 2 },
-			{ type = "item", name = "refined-concrete", amount = 10 },
+			{ type = "item", name = "refined-concrete", amount = 5 },
 			{ type = "item", name = "uranium-235", amount = 1 },
 		},
 		energy_required = 10,
@@ -53,6 +53,7 @@ data:extend({
 })
 table.insert(data.raw["lab"]["lab"].inputs, "nuclear-science-pack")
 table.insert(data.raw["lab"]["biolab"].inputs, "nuclear-science-pack")
+
 table.insert(data.raw.technology["biolab"].unit.ingredients, { "nuclear-science-pack", 1 })
 table.insert(data.raw.technology["kovarex-enrichment-process"].unit.ingredients, { "nuclear-science-pack", 1 })
 table.insert(data.raw.technology["nuclear-power"].unit.ingredients, { "nuclear-science-pack", 1 })
@@ -92,7 +93,7 @@ add_centrifuging_recipe("biolab")
 add_centrifuging_recipe("fusion-reactor-equipment")
 data.raw["assembling-machine"]["centrifuge"].module_slots = 4
 data.raw["assembling-machine"]["centrifuge"].effect_receiver = { base_effect = { productivity = 0.5 } }
-data.raw["assembling-machine"]["centrifuge"].weight = 200 * kg
+data.raw["item"]["centrifuge"].weight = 200 * kg
 -- make lignumis inserter and belt equal to the
 --
 --if settings.startup["ltdi-wood-and-iron-belts-are-equal"].value then
