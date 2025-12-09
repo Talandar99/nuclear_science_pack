@@ -1,4 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.2.0
+Date: 2025-12-08
+  Changelog:
+    - nuclear science pack is now unlocked with kovarex-enrichment-process instead of uranium processing
+    - added nuclear science pack to more technologies
+    - added compatibility with Cerys. 
+    - Cerys: Plutionium weaponry is now prerequisite to nuclear science
+    - Cerys: Applications of radioactivity now require fission reactor equipment technology
+    - Cerys: Radiative heaters now require nuclear science pack instead of crygoenic one prerequisite
+---------------------------------------------------------------------------------------------------
 Version: 0.1.2
 Date: 2025-11-30
   Changelog:

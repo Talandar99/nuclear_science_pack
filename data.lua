@@ -54,16 +54,39 @@ data:extend({
 table.insert(data.raw["lab"]["lab"].inputs, "nuclear-science-pack")
 table.insert(data.raw["lab"]["biolab"].inputs, "nuclear-science-pack")
 
-table.insert(data.raw.technology["biolab"].unit.ingredients, { "nuclear-science-pack", 1 })
-table.insert(data.raw.technology["kovarex-enrichment-process"].unit.ingredients, { "nuclear-science-pack", 1 })
-table.insert(data.raw.technology["nuclear-power"].unit.ingredients, { "nuclear-science-pack", 1 })
-table.insert(data.raw.technology["uranium-ammo"].unit.ingredients, { "nuclear-science-pack", 1 })
-table.insert(data.raw.technology["atomic-bomb"].unit.ingredients, { "nuclear-science-pack", 1 })
-table.insert(data.raw.technology["captive-biter-spawner"].unit.ingredients, { "nuclear-science-pack", 1 })
-table.insert(data.raw.technology["fission-reactor-equipment"].unit.ingredients, { "nuclear-science-pack", 1 })
-table.insert(data.raw.technology["nuclear-fuel-reprocessing"].unit.ingredients, { "nuclear-science-pack", 1 })
-table.insert(data.raw.technology["fusion-reactor-equipment"].unit.ingredients, { "nuclear-science-pack", 1 })
+local function add_science_pack_and_kovarex_prerequisite(name)
+	-- check if tech exist
+	local tech = data.raw.technology[name]
+	if not tech then
+		return
+	end
+	-- add science pack
+	table.insert(tech.unit.ingredients, { "nuclear-science-pack", 1 })
+	-- add kovarex prerequisite only if missing
+	for _, p in pairs(tech.prerequisites or {}) do
+		if p == "kovarex-enrichment-process" then
+			return
+		end
+	end
+	table.insert(tech.prerequisites, "kovarex-enrichment-process")
+end
+add_science_pack_and_kovarex_prerequisite("biolab")
+add_science_pack_and_kovarex_prerequisite("nuclear-power")
+add_science_pack_and_kovarex_prerequisite("uranium-ammo")
+add_science_pack_and_kovarex_prerequisite("atomic-bomb")
+add_science_pack_and_kovarex_prerequisite("captive-biter-spawner")
+add_science_pack_and_kovarex_prerequisite("fission-reactor-equipment")
+add_science_pack_and_kovarex_prerequisite("nuclear-fuel-reprocessing")
+add_science_pack_and_kovarex_prerequisite("spidertron")
+add_science_pack_and_kovarex_prerequisite("fusion-reactor-equipment")
+add_science_pack_and_kovarex_prerequisite("fusion-reactor")
+add_science_pack_and_kovarex_prerequisite("promethium-science-pack")
+add_science_pack_and_kovarex_prerequisite("planet-discovery-aquilo")
+add_science_pack_and_kovarex_prerequisite("foundation")
+add_science_pack_and_kovarex_prerequisite("legendary-quality")
+
 table.insert(data.raw.technology["research-productivity"].unit.ingredients, { "nuclear-science-pack", 1 })
+
 data.raw.technology["kovarex-enrichment-process"].unit = nil
 data.raw.technology["kovarex-enrichment-process"].research_trigger = {
 	type = "craft-item",
@@ -71,9 +94,10 @@ data.raw.technology["kovarex-enrichment-process"].research_trigger = {
 	count = 50,
 }
 table.insert(
-	data.raw.technology["uranium-processing"].effects,
+	data.raw.technology["kovarex-enrichment-process"].effects,
 	{ type = "unlock-recipe", recipe = "nuclear-science-pack" }
 )
+
 local function add_centrifuging_recipe(recipe_name)
 	if data.raw["recipe"][recipe_name] then
 		if not data.raw["recipe"][recipe_name].additional_categories then
@@ -94,6 +118,12 @@ add_centrifuging_recipe("fusion-reactor-equipment")
 data.raw["assembling-machine"]["centrifuge"].module_slots = 4
 data.raw["assembling-machine"]["centrifuge"].effect_receiver = { base_effect = { productivity = 0.5 } }
 data.raw["item"]["centrifuge"].weight = 200 * kg
+
+if mods["Cerys-Moon-of-Fulgora"] then
+	table.insert(data.raw.technology["kovarex-enrichment-process"].prerequisites, "cerys-plutonium-weaponry")
+	table.insert(data.raw.technology["cerys-applications-of-radioactivity"].prerequisites, "fission-reactor-equipment")
+	add_science_pack_and_kovarex_prerequisite("cerys-radiative-heaters")
+end
 -- make lignumis inserter and belt equal to the
 --
 --if settings.startup["ltdi-wood-and-iron-belts-are-equal"].value then
