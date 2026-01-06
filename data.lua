@@ -115,80 +115,27 @@ add_centrifuging_recipe("spidertron")
 add_centrifuging_recipe("nuclear-reactor")
 add_centrifuging_recipe("biolab")
 add_centrifuging_recipe("fusion-reactor-equipment")
+add_centrifuging_recipe("centrifuge")
 data.raw["assembling-machine"]["centrifuge"].module_slots = 4
 data.raw["assembling-machine"]["centrifuge"].effect_receiver = { base_effect = { productivity = 0.5 } }
 data.raw["item"]["centrifuge"].weight = 200 * kg
 
 if mods["Cerys-Moon-of-Fulgora"] then
 	table.insert(data.raw.technology["kovarex-enrichment-process"].prerequisites, "cerys-plutonium-weaponry")
-	table.insert(data.raw.technology["cerys-applications-of-radioactivity"].prerequisites, "fission-reactor-equipment")
+	--table.insert(data.raw.technology["cerys-applications-of-radioactivity"].prerequisites, "fission-reactor-equipment")
+	data.raw.technology["moon-discovery-cerys"].prerequisites = { "planet-discovery-fulgora" }
 	add_science_pack_and_kovarex_prerequisite("cerys-radiative-heaters")
 end
--- make lignumis inserter and belt equal to the
---
---if settings.startup["ltdi-wood-and-iron-belts-are-equal"].value then
---	data.raw["transport-belt"]["wood-transport-belt"].speed = data.raw["transport-belt"]["transport-belt"].speed
---	data.raw["underground-belt"]["wood-underground-belt"].speed = data.raw["underground-belt"]["underground-belt"].speed
---	data.raw["splitter"]["wood-splitter"].speed = data.raw["splitter"]["splitter"].speed
---end
----- add progressive recipes but to second tier
---if settings.startup["ltdi-enable-progressive-recipes-for-machines"].value then
---	--------------------------------------------------------------------------------
---	-- machines
---	--------------------------------------------------------------------------------
---	table.insert(
---		data.raw.recipe["assembling-machine-2"].ingredients,
---		{ type = "item", name = "burner-assembling-machine", amount = 1 }
---	)
---	--------------------------------------------------------------------------------
---	-- belts
---	--------------------------------------------------------------------------------
---	table.insert(
---		data.raw.recipe["fast-transport-belt"].ingredients,
---		{ type = "item", name = "wood-transport-belt", amount = 1 }
---	)
---	table.insert(
---		data.raw.recipe["fast-underground-belt"].ingredients,
---		{ type = "item", name = "wood-underground-belt", amount = 2 }
---	)
---	table.insert(data.raw.recipe["fast-splitter"].ingredients, { type = "item", name = "wood-splitter", amount = 1 })
---
---	--------------------------------------------------------------------------------
---	-- inserter
---	--------------------------------------------------------------------------------
---	table.insert(data.raw.recipe["fast-inserter"].ingredients, { type = "item", name = "burner-inserter", amount = 1 })
---	--------------------------------------------------------------------------------
---	-- ammo
---	--------------------------------------------------------------------------------
---	table.insert(
---		data.raw.recipe["piercing-rounds-magazine"].ingredients,
---		{ type = "item", name = "wood-darts-magazine", amount = 1 }
---	)
---	--------------------------------------------------------------------------------
---end
------
---if settings.startup["ltdi-add-steam-assembling-machine-recipe"].value then
---	data:extend({
---		{
---			type = "recipe",
---			name = "steam-assembling-machine-iron-pipe",
---			icons = {
---				{ icon = "__lignumis-assets__/graphics/icons/steam-assembling-machine.png", icon_size = 64 },
---				{ icon = "__base__/graphics/icons/iron-plate.png", icon_size = 64, scale = 0.25, shift = { 8, 8 } },
---			},
---			enabled = false,
---			ingredients = {
---				{ type = "item", name = "pipe", amount = 5 },
---				{ type = "item", name = "iron-plate", amount = 10 },
---				{ type = "item", name = "iron-gear-wheel", amount = 5 },
---			},
---			results = { { type = "item", name = "steam-assembling-machine", amount = 1 } },
---			allow_productivity = false,
---		},
---	})
---
---	table.insert(
---		data.raw["technology"]["steam-power"].effects,
---		{ type = "unlock-recipe", recipe = "steam-assembling-machine-iron-pipe" }
---	)
---end
+
+if settings.startup["nuclear-assembling-machine"].value then
+	require("nuclear-assembling-machine")
+end
+if settings.startup["refillable-fission-reactor-equipment"].value then
+	data.raw["generator-equipment"]["fission-reactor-equipment"].burner = {
+		type = "burner",
+		fuel_categories = { "nuclear" },
+		fuel_inventory_size = 1,
+		burnt_inventory_size = 1,
+	}
+	data.raw["generator-equipment"]["fission-reactor-equipment"].power = "1.5MW"
+end

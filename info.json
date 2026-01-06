@@ -1,12 +1,13 @@
 {
     "name": "nuclear_science_pack",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "title": "Nuclear science pack",
     "author": "Talandar",
     "dependencies": [
         "base >= 2.0",
         "space-age",
-        "? Cerys-Moon-of-Fulgora"
+        "? Cerys-Moon-of-Fulgora",
+        "? autofuel"
     ],
     "description": "Mod that adds nuclear science pack and changes centrifuge into special building",
     "factorio_version": "2.0",
