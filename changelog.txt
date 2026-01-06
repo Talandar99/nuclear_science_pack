@@ -6,6 +6,7 @@ Date: 2026-01-06
     - added nuclear assembling machine (can be disabled in settings)
     - portable fission reactor now require fuel cells to work but it's 2x more stronger (can be disabled in settings)
     - added autofuel mod as optional dependancy because it works great wtih changes made to portable fission reactor
+    - centrifuge can now be crafted in centrifuge just like all other special buildings
 ---------------------------------------------------------------------------------------------------
 Version: 0.2.1
 Date: 2026-01-01
