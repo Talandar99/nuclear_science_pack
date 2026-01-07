@@ -150,7 +150,7 @@ data:extend({
 			},
 			emissions_per_minute = { pollution = 1 }, --12 is burner drill ,10 is electric drill
 		},
-		energy_usage = "1MW",
+		energy_usage = "2.5MW",
 		module_slots = 6,
 		allowed_effects = { "consumption", "speed", "productivity", "pollution", "quality" },
 	},
