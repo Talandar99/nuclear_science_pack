@@ -2,10 +2,9 @@
 Version: 0.3.2
 Date: 2026-01-23
   Changelog:
-    - Nuclear Science is marked as incompatibility. 
-      Both mods want to do the same thing. Having both is unnecessary. Pick Nuclear Science 
-      if you want additional building for crafting, or this mod if you want centrifuge to be special 
-      building instead
+    - Nuclear Science is marked as incompatibility. Both mods want to do the same thing. 
+      Pick Nuclear Science if you want additional building for crafting, or this mod if 
+      you want centrifuge to be special building instead
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.1
 Date: 2026-01-07
