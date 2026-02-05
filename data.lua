@@ -23,6 +23,23 @@ data:extend({
 		factoriopedia_durability_description_key = "description.factoriopedia-science-pack-remaining-amount-key",
 		durability_description_value = "description.science-pack-remaining-amount-value",
 		random_tint_color = item_tints.bluish_science,
+		pictures = {
+			layers = {
+				{
+					filename = "__nuclear_science_pack__/graphics/nuclear-science-pack.png",
+					mipmap_count = 4,
+					scale = 0.5,
+					size = 64,
+				},
+				{
+					filename = "__nuclear_science_pack__/graphics/nuclear-science-pack-glow.png",
+					mipmap_count = 4,
+					scale = 0.5,
+					size = 64,
+					draw_as_light = true,
+				},
+			},
+		},
 	},
 	{
 		type = "recipe",
@@ -116,6 +133,7 @@ add_centrifuging_recipe("nuclear-reactor")
 add_centrifuging_recipe("biolab")
 add_centrifuging_recipe("fusion-reactor-equipment")
 add_centrifuging_recipe("centrifuge")
+add_centrifuging_recipe("atomic-bomb")
 data.raw["assembling-machine"]["centrifuge"].module_slots = 4
 data.raw["assembling-machine"]["centrifuge"].effect_receiver = { base_effect = { productivity = 0.5 } }
 data.raw["item"]["centrifuge"].weight = 200 * kg

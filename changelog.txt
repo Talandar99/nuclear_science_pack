@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.4.0
+Date: 2026-02-05
+  Changelog:
+    - nuclear science pack now glows in the dark
+    - nuclear assembling machine now glows in the dark
+    - atomic bomb can now be crafted in centrifuge 
+---------------------------------------------------------------------------------------------------
 Version: 0.3.2
 Date: 2026-01-23
   Changelog:
