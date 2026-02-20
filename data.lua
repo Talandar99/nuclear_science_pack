@@ -3,6 +3,23 @@ local item_effects = require("__space-age__.prototypes.item-effects")
 local item_tints = require("__base__.prototypes.item-tints")
 local item_sounds = require("__base__.prototypes.item_sounds")
 local sounds = require("__base__.prototypes.entity.sounds")
+
+local function add_prerequisite_if_missing(tech_name, prerequisite_name)
+	local tech = data.raw.technology[tech_name]
+	if not tech then
+		return
+	end
+
+	tech.prerequisites = tech.prerequisites or {}
+
+	for _, p in pairs(tech.prerequisites) do
+		if p == prerequisite_name then
+			return -- już istnieje, nic nie robimy
+		end
+	end
+
+	table.insert(tech.prerequisites, prerequisite_name)
+end
 data:extend({
 	{
 		type = "tool",
@@ -143,6 +160,24 @@ if mods["Cerys-Moon-of-Fulgora"] then
 	--table.insert(data.raw.technology["cerys-applications-of-radioactivity"].prerequisites, "fission-reactor-equipment")
 	data.raw.technology["moon-discovery-cerys"].prerequisites = { "planet-discovery-fulgora" }
 	add_science_pack_and_kovarex_prerequisite("cerys-radiative-heaters")
+
+	add_science_pack_and_kovarex_prerequisite("cerys-mixed-oxide-reactors")
+	add_prerequisite_if_missing("cerys-mixed-oxide-reactors", "nuclear-power")
+	add_prerequisite_if_missing("fusion-reactor", "cerys-mixed-oxide-reactors")
+
+	add_science_pack_and_kovarex_prerequisite("cerys-applications-of-radioactivity")
+	add_prerequisite_if_missing("cerys-applications-of-radioactivity", "fission-reactor-equipment")
+	add_prerequisite_if_missing("fusion-reactor-equipment", "cerys-applications-of-radioactivity")
+
+	if settings.startup["refillable-mixed-oxide-reactor-equipment"].value then
+		data.raw["generator-equipment"]["mixed-oxide-reactor-equipment"].burner = {
+			type = "burner",
+			fuel_categories = { "nuclear-mixed-oxide" },
+			fuel_inventory_size = 1,
+			burnt_inventory_size = 1,
+		}
+		data.raw["generator-equipment"]["mixed-oxide-reactor-equipment"].power = "1.8MW"
+	end
 end
 
 if settings.startup["nuclear-assembling-machine"].value then

@@ -193,3 +193,10 @@ data:extend({
 		},
 	},
 })
+
+if mods["Cerys-Moon-of-Fulgora"] then
+	table.insert(
+		data.raw["assembling-machine"]["nuclear-assembling-machine"].energy_source.fuel_categories,
+		"nuclear-mixed-oxide"
+	)
+end

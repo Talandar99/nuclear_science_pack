@@ -16,6 +16,18 @@ data:extend({
 })
 
 if mods["Cerys-Moon-of-Fulgora"] then
+	data:extend({
+		{
+			type = "bool-setting",
+			name = "refillable-mixed-oxide-reactor-equipment",
+			setting_type = "startup",
+			default_value = true,
+			order = "nuclear-science-pack-b",
+		},
+	})
+end
+
+if mods["Cerys-Moon-of-Fulgora"] then
 	local function force_setting(setting_type, setting_name, value)
 		local setting = data.raw[setting_type .. "-setting"][setting_name]
 		if setting then

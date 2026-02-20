@@ -1,4 +1,19 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.5.1
+Date: 2026-02-10
+  Bugfixes:
+    - fixed runtime crash with Cerys
+---------------------------------------------------------------------------------------------------
+Version: 0.5.0
+Date: 2026-02-11
+  Changelog:
+    - Cerys compatibility: mixed oxide fuel cell can now power nuclear assembling machine
+    - Cerys compatibility: portable mixed oxide reactor can now use mixed oxide 
+      fuel cells but is twice as strong (can be disabled in settings)
+    - Cerys compatibility: mixed oxide nuclear reactor now require regular reactor to be researched first
+    - Cerys compatibility: mixed oxide reactor is now addtional prerequisite to fusion technology
+    - Cerys compatibility: portable mixed oxide reactor is now additional prerequisite to portable fusion reactor
+---------------------------------------------------------------------------------------------------
 Version: 0.4.0
 Date: 2026-02-05
   Changelog:
