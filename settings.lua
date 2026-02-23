@@ -13,6 +13,13 @@ data:extend({
 		default_value = true,
 		order = "nuclear-science-pack-b",
 	},
+	{
+		type = "bool-setting",
+		name = "nuclear-science-pack-centrifuge-prod-bonus",
+		setting_type = "startup",
+		default_value = true,
+		order = "nuclear-science-pack-z",
+	},
 })
 
 if mods["Cerys-Moon-of-Fulgora"] then
@@ -22,7 +29,14 @@ if mods["Cerys-Moon-of-Fulgora"] then
 			name = "refillable-mixed-oxide-reactor-equipment",
 			setting_type = "startup",
 			default_value = true,
-			order = "nuclear-science-pack-b",
+			order = "nuclear-science-pack-c",
+		},
+		{
+			type = "bool-setting",
+			name = "lock-nuclear-science-pack-behind-cerys",
+			setting_type = "startup",
+			default_value = true,
+			order = "nuclear-science-pack-d",
 		},
 	})
 end

@@ -152,11 +152,13 @@ add_centrifuging_recipe("fusion-reactor-equipment")
 add_centrifuging_recipe("centrifuge")
 add_centrifuging_recipe("atomic-bomb")
 data.raw["assembling-machine"]["centrifuge"].module_slots = 4
-data.raw["assembling-machine"]["centrifuge"].effect_receiver = { base_effect = { productivity = 0.5 } }
+
+if settings.startup["nuclear-science-pack-centrifuge-prod-bonus"].value then
+	data.raw["assembling-machine"]["centrifuge"].effect_receiver = { base_effect = { productivity = 0.5 } }
+end
 data.raw["item"]["centrifuge"].weight = 200 * kg
 
 if mods["Cerys-Moon-of-Fulgora"] then
-	table.insert(data.raw.technology["kovarex-enrichment-process"].prerequisites, "cerys-plutonium-weaponry")
 	--table.insert(data.raw.technology["cerys-applications-of-radioactivity"].prerequisites, "fission-reactor-equipment")
 	data.raw.technology["moon-discovery-cerys"].prerequisites = { "planet-discovery-fulgora" }
 	add_science_pack_and_kovarex_prerequisite("cerys-radiative-heaters")
@@ -168,6 +170,12 @@ if mods["Cerys-Moon-of-Fulgora"] then
 	add_science_pack_and_kovarex_prerequisite("cerys-applications-of-radioactivity")
 	add_prerequisite_if_missing("cerys-applications-of-radioactivity", "fission-reactor-equipment")
 	add_prerequisite_if_missing("fusion-reactor-equipment", "cerys-applications-of-radioactivity")
+
+	if settings.startup["lock-nuclear-science-pack-behind-cerys"].value then
+		add_prerequisite_if_missing("uranium-mining", "cerys-plutonium-weaponry")
+		add_prerequisite_if_missing("uranium-processing", "cerys-plutonium-weaponry")
+		add_prerequisite_if_missing("kovarex-enrichment-process", "cerys-plutonium-weaponry")
+	end
 
 	if settings.startup["refillable-mixed-oxide-reactor-equipment"].value then
 		data.raw["generator-equipment"]["mixed-oxide-reactor-equipment"].burner = {
@@ -192,3 +200,7 @@ if settings.startup["refillable-fission-reactor-equipment"].value then
 	}
 	data.raw["generator-equipment"]["fission-reactor-equipment"].power = "1.5MW"
 end
+data.raw["technology"]["kovarex-enrichment-process"].icon =
+	"__nuclear_science_pack__/graphics/nuclear-science-pack-technology.png"
+
+data.raw["technology"]["kovarex-enrichment-process"].localised_name = { "technology-name.nuclear-science-pack" }

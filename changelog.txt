@@ -1,4 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.6.0
+Date: 2026-02-23
+  Changelog:
+    - Added setting to enable/disable productivity bonus on centrifuge. Prod bonus is enabled by default
+      It can cause balancing issues or infinity loop while combined with some mods, 
+      so now you can disable it if it's problematic
+    - Added setting to enable/disable gatekeeping nuclear science by Cerys. Enabled by default
+    - Added nuclear science pack icon
+    - Renamed "Kovarex enrichment process" technology to "Nuclear science pack"
+---------------------------------------------------------------------------------------------------
 Version: 0.5.1
 Date: 2026-02-10
   Bugfixes:

@@ -1,14 +1,14 @@
 {
     "name": "nuclear_science_pack",
-    "version": "0.5.1",
+    "version": "0.6.0",
     "title": "Nuclear Science Pack",
     "author": "Talandar",
     "dependencies": [
         "base >= 2.0",
         "space-age",
         "? Cerys-Moon-of-Fulgora",
-        "! atan-nuclear-science",
-        "? autofuel"
+        "? autofuel",
+        "! atan-nuclear-science"
     ],
     "description": "Mod that adds nuclear science pack, expands nuclear technology and changes centrifuge into special building",
     "factorio_version": "2.0",
