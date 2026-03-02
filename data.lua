@@ -192,8 +192,16 @@ end
 
 if mods["maraxsis"] then
 	add_science_pack_and_kovarex_prerequisite("planet-discovery-maraxsis")
+	add_science_pack_and_kovarex_prerequisite("maraxsis-nuclear-submarine")
+	add_science_pack_and_kovarex_prerequisite("maraxsis-depth-charges")
+	add_science_pack_and_kovarex_prerequisite("maraxsis-stone-centrifuging")
 	add_prerequisite_if_missing("fusion-reactor", "maraxsis-salt-reactor")
 	add_prerequisite_if_missing("planet-discovery-maraxsis", "nuclear-power")
+	if mods["Cerys-Moon-of-Fulgora"] then
+		if settings.startup["lock-mixed-oxide-reactor-behind-maraxsis-salt-reactor"].value then
+			add_prerequisite_if_missing("cerys-mixed-oxide-reactors", "maraxsis-salt-reactor")
+		end
+	end
 end
 
 if settings.startup["nuclear-assembling-machine"].value then
@@ -217,7 +225,7 @@ if settings.startup["spidertron-require-fuel-cells"].value then
 		burnt_inventory_size = 3,
 		effectivity = 1,
 	}
-	data.raw["spider-vehicle"]["spidertron"].movement_energy_consumption = "10MW"
+	data.raw["spider-vehicle"]["spidertron"].movement_energy_consumption = "12MW"
 	if mods["Cerys-Moon-of-Fulgora"] then
 		table.insert(data.raw["spider-vehicle"]["spidertron"].energy_source.fuel_categories, "nuclear-mixed-oxide")
 	end

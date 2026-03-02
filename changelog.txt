@@ -1,12 +1,22 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.7.1
+Date: 2026-03-03
+  Changelog:
+    - Reduced max fuel consumption for nuclear assembling machine 4MJ -> 3MJ 
+    - Maraxsis compatibility: maraxsis-nuclear-submarine now require nuclear science pack for research 
+    - Maraxsis compatibility: maraxsis-depth-charges now require nuclear science pack for research 
+    - Maraxsis compatibility: maraxsis-stone-centrifuging now require nuclear science pack for research 
+---------------------------------------------------------------------------------------------------
 Version: 0.7.0
 Date: 2026-03-02
   Changelog:
-    - Increased max fuel consumption 2.5MJ -> 4MJ
+    - Increased max fuel consumption for nuclear assembling machine 2.5MJ -> 4MJ 
     - added planet Maraxsis as optional dependency
     - Maraxsis MSR fuel cell can now be used in Nuclear Assembling Machine
     - Spidertron can now be powered with fuel cells: (Vanilla)Nuclear, (Cerys)Mixed-oxide, (Maraxsis)MSR 
     - Spidertron requirement to use fuel cells can be disabled in settings
+    - Maraxsis nuclear submarine now accepts Cerys mixed oxide fuel cells
+    - With Cerys and Maraxsis installed you need to research MSR reactor before mixed oxide reactor (can be disabled in settings)
 ---------------------------------------------------------------------------------------------------
 Version: 0.6.0
 Date: 2026-02-23

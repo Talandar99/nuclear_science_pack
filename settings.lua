@@ -18,7 +18,7 @@ data:extend({
 		name = "spidertron-require-fuel-cells",
 		setting_type = "startup",
 		default_value = true,
-		order = "nuclear-science-pack-b",
+		order = "nuclear-science-pack-c",
 	},
 	{
 		type = "bool-setting",
@@ -36,14 +36,26 @@ if mods["Cerys-Moon-of-Fulgora"] then
 			name = "refillable-mixed-oxide-reactor-equipment",
 			setting_type = "startup",
 			default_value = true,
-			order = "nuclear-science-pack-c",
+			order = "nuclear-science-pack-d",
 		},
 		{
 			type = "bool-setting",
 			name = "lock-nuclear-science-pack-behind-cerys",
 			setting_type = "startup",
 			default_value = true,
-			order = "nuclear-science-pack-d",
+			order = "nuclear-science-pack-e",
+		},
+	})
+end
+
+if mods["Cerys-Moon-of-Fulgora"] and mods["maraxsis"] then
+	data:extend({
+		{
+			type = "bool-setting",
+			name = "lock-mixed-oxide-reactor-behind-maraxsis-salt-reactor",
+			setting_type = "startup",
+			default_value = true,
+			order = "nuclear-science-pack-z",
 		},
 	})
 end
