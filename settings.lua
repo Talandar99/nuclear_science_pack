@@ -15,6 +15,13 @@ data:extend({
 	},
 	{
 		type = "bool-setting",
+		name = "spidertron-require-fuel-cells",
+		setting_type = "startup",
+		default_value = true,
+		order = "nuclear-science-pack-b",
+	},
+	{
+		type = "bool-setting",
 		name = "nuclear-science-pack-centrifuge-prod-bonus",
 		setting_type = "startup",
 		default_value = true,

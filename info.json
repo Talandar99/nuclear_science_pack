@@ -7,6 +7,7 @@
         "base >= 2.0",
         "space-age",
         "? Cerys-Moon-of-Fulgora",
+        "? maraxsis",
         "? autofuel",
         "! atan-nuclear-science"
     ],

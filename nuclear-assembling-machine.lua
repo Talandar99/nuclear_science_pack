@@ -160,7 +160,7 @@ data:extend({
 			},
 			emissions_per_minute = { pollution = 1 }, --12 is burner drill ,10 is electric drill
 		},
-		energy_usage = "2.5MW",
+		energy_usage = "4MW",
 		module_slots = 6,
 		allowed_effects = { "consumption", "speed", "productivity", "pollution", "quality" },
 	},
@@ -193,10 +193,3 @@ data:extend({
 		},
 	},
 })
-
-if mods["Cerys-Moon-of-Fulgora"] then
-	table.insert(
-		data.raw["assembling-machine"]["nuclear-assembling-machine"].energy_source.fuel_categories,
-		"nuclear-mixed-oxide"
-	)
-end

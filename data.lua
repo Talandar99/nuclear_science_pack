@@ -3,7 +3,7 @@ local item_effects = require("__space-age__.prototypes.item-effects")
 local item_tints = require("__base__.prototypes.item-tints")
 local item_sounds = require("__base__.prototypes.item_sounds")
 local sounds = require("__base__.prototypes.entity.sounds")
-
+-- helper functions -----------------------------------------------------------
 local function add_prerequisite_if_missing(tech_name, prerequisite_name)
 	local tech = data.raw.technology[tech_name]
 	if not tech then
@@ -20,6 +20,32 @@ local function add_prerequisite_if_missing(tech_name, prerequisite_name)
 
 	table.insert(tech.prerequisites, prerequisite_name)
 end
+local function add_science_pack_and_kovarex_prerequisite(name)
+	-- check if tech exist
+	local tech = data.raw.technology[name]
+	if not tech then
+		return
+	end
+	-- add science pack
+	table.insert(tech.unit.ingredients, { "nuclear-science-pack", 1 })
+	-- add kovarex prerequisite only if missing
+	for _, p in pairs(tech.prerequisites or {}) do
+		if p == "kovarex-enrichment-process" then
+			return
+		end
+	end
+	table.insert(tech.prerequisites, "kovarex-enrichment-process")
+end
+local function add_centrifuging_recipe(recipe_name)
+	if data.raw["recipe"][recipe_name] then
+		if not data.raw["recipe"][recipe_name].additional_categories then
+			data.raw["recipe"][recipe_name].additional_categories = {}
+		end
+		table.insert(data.raw["recipe"][recipe_name].additional_categories, "centrifuging")
+	end
+end
+
+-- helper functions -----------------------------------------------------------
 data:extend({
 	{
 		type = "tool",
@@ -88,22 +114,6 @@ data:extend({
 table.insert(data.raw["lab"]["lab"].inputs, "nuclear-science-pack")
 table.insert(data.raw["lab"]["biolab"].inputs, "nuclear-science-pack")
 
-local function add_science_pack_and_kovarex_prerequisite(name)
-	-- check if tech exist
-	local tech = data.raw.technology[name]
-	if not tech then
-		return
-	end
-	-- add science pack
-	table.insert(tech.unit.ingredients, { "nuclear-science-pack", 1 })
-	-- add kovarex prerequisite only if missing
-	for _, p in pairs(tech.prerequisites or {}) do
-		if p == "kovarex-enrichment-process" then
-			return
-		end
-	end
-	table.insert(tech.prerequisites, "kovarex-enrichment-process")
-end
 add_science_pack_and_kovarex_prerequisite("biolab")
 add_science_pack_and_kovarex_prerequisite("nuclear-power")
 add_science_pack_and_kovarex_prerequisite("uranium-ammo")
@@ -132,14 +142,6 @@ table.insert(
 	{ type = "unlock-recipe", recipe = "nuclear-science-pack" }
 )
 
-local function add_centrifuging_recipe(recipe_name)
-	if data.raw["recipe"][recipe_name] then
-		if not data.raw["recipe"][recipe_name].additional_categories then
-			data.raw["recipe"][recipe_name].additional_categories = {}
-		end
-		table.insert(data.raw["recipe"][recipe_name].additional_categories, "centrifuging")
-	end
-end
 add_centrifuging_recipe("uranium-rounds-magazine")
 add_centrifuging_recipe("uranium-fuel-cell")
 add_centrifuging_recipe("uranium-cannon-shell")
@@ -188,6 +190,12 @@ if mods["Cerys-Moon-of-Fulgora"] then
 	end
 end
 
+if mods["maraxsis"] then
+	add_science_pack_and_kovarex_prerequisite("planet-discovery-maraxsis")
+	add_prerequisite_if_missing("fusion-reactor", "maraxsis-salt-reactor")
+	add_prerequisite_if_missing("planet-discovery-maraxsis", "nuclear-power")
+end
+
 if settings.startup["nuclear-assembling-machine"].value then
 	require("nuclear-assembling-machine")
 end
@@ -200,6 +208,39 @@ if settings.startup["refillable-fission-reactor-equipment"].value then
 	}
 	data.raw["generator-equipment"]["fission-reactor-equipment"].power = "1.5MW"
 end
+-- fuel cells
+if settings.startup["spidertron-require-fuel-cells"].value then
+	data.raw["spider-vehicle"]["spidertron"].energy_source = {
+		type = "burner",
+		fuel_categories = { "nuclear" },
+		fuel_inventory_size = 3,
+		burnt_inventory_size = 3,
+		effectivity = 1,
+	}
+	data.raw["spider-vehicle"]["spidertron"].movement_energy_consumption = "10MW"
+	if mods["Cerys-Moon-of-Fulgora"] then
+		table.insert(data.raw["spider-vehicle"]["spidertron"].energy_source.fuel_categories, "nuclear-mixed-oxide")
+	end
+	if mods["maraxsis"] then
+		table.insert(data.raw["spider-vehicle"]["spidertron"].energy_source.fuel_categories, "maraxsis-salt-reactor")
+	end
+end
+
+if settings.startup["nuclear-assembling-machine"].value then
+	if mods["Cerys-Moon-of-Fulgora"] then
+		table.insert(
+			data.raw["assembling-machine"]["nuclear-assembling-machine"].energy_source.fuel_categories,
+			"nuclear-mixed-oxide"
+		)
+	end
+	if mods["maraxsis"] then
+		table.insert(
+			data.raw["assembling-machine"]["nuclear-assembling-machine"].energy_source.fuel_categories,
+			"maraxsis-salt-reactor"
+		)
+	end
+end
+
 data.raw["technology"]["kovarex-enrichment-process"].icon =
 	"__nuclear_science_pack__/graphics/nuclear-science-pack-technology.png"
 

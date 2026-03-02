@@ -1,4 +1,13 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.7.0
+Date: 2026-03-02
+  Changelog:
+    - Increased max fuel consumption 2.5MJ -> 4MJ
+    - added planet Maraxsis as optional dependency
+    - Maraxsis MSR fuel cell can now be used in Nuclear Assembling Machine
+    - Spidertron can now be powered with fuel cells: (Vanilla)Nuclear, (Cerys)Mixed-oxide, (Maraxsis)MSR 
+    - Spidertron requirement to use fuel cells can be disabled in settings
+---------------------------------------------------------------------------------------------------
 Version: 0.6.0
 Date: 2026-02-23
   Changelog:
