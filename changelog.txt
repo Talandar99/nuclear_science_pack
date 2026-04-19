@@ -3,7 +3,8 @@ Version: 0.8.0
 Date: 2026-04-19
   Changelog:
     - Nuclear science pack no longer require Space Age DLC
-    - added new science icon
+    - added new science item icon
+    - added new science technology icon
     - changed thumbnail
   Balancing:
     - Cerys: Radiative heaters now require both nuclear science pack and crygoenic science pack 
