@@ -1,5 +1,3 @@
-local space_age_item_sounds = require("__space-age__.prototypes.item_sounds")
-local item_effects = require("__space-age__.prototypes.item-effects")
 local item_tints = require("__base__.prototypes.item-tints")
 local item_sounds = require("__base__.prototypes.item_sounds")
 local sounds = require("__base__.prototypes.entity.sounds")
@@ -89,13 +87,6 @@ data:extend({
 		name = "nuclear-science-pack",
 		subgroup = "science-pack",
 		category = "centrifuging",
-		surface_conditions = {
-			{
-				property = "pressure",
-				min = 1000,
-				max = 1000,
-			},
-		},
 		enabled = false,
 		ingredients = {
 			{ type = "item", name = "water-barrel", amount = 2 },
@@ -111,10 +102,22 @@ data:extend({
 		allow_productivity = true,
 	},
 })
-table.insert(data.raw["lab"]["lab"].inputs, "nuclear-science-pack")
-table.insert(data.raw["lab"]["biolab"].inputs, "nuclear-science-pack")
 
-add_science_pack_and_kovarex_prerequisite("biolab")
+if mods["space-age"] then
+	data.raw["recipe"]["nuclear-science-pack"].surface_conditions = {
+		{
+			property = "pressure",
+			min = 1000,
+			max = 1000,
+		},
+	}
+end
+table.insert(data.raw["lab"]["lab"].inputs, "nuclear-science-pack")
+
+if mods["space-age"] then
+	table.insert(data.raw["lab"]["biolab"].inputs, "nuclear-science-pack")
+	add_science_pack_and_kovarex_prerequisite("biolab")
+end
 add_science_pack_and_kovarex_prerequisite("nuclear-power")
 add_science_pack_and_kovarex_prerequisite("uranium-ammo")
 add_science_pack_and_kovarex_prerequisite("atomic-bomb")
@@ -129,8 +132,9 @@ add_science_pack_and_kovarex_prerequisite("planet-discovery-aquilo")
 add_science_pack_and_kovarex_prerequisite("foundation")
 add_science_pack_and_kovarex_prerequisite("legendary-quality")
 
-table.insert(data.raw.technology["research-productivity"].unit.ingredients, { "nuclear-science-pack", 1 })
-
+if mods["space-age"] then
+	table.insert(data.raw.technology["research-productivity"].unit.ingredients, { "nuclear-science-pack", 1 })
+end
 data.raw.technology["kovarex-enrichment-process"].unit = nil
 data.raw.technology["kovarex-enrichment-process"].research_trigger = {
 	type = "craft-item",
@@ -149,7 +153,9 @@ add_centrifuging_recipe("explosive-uranium-cannon-shell")
 add_centrifuging_recipe("fission-reactor-equipment")
 add_centrifuging_recipe("spidertron")
 add_centrifuging_recipe("nuclear-reactor")
-add_centrifuging_recipe("biolab")
+if mods["space-age"] then
+	add_centrifuging_recipe("biolab")
+end
 add_centrifuging_recipe("fusion-reactor-equipment")
 add_centrifuging_recipe("centrifuge")
 add_centrifuging_recipe("atomic-bomb")
@@ -251,5 +257,6 @@ end
 
 data.raw["technology"]["kovarex-enrichment-process"].icon =
 	"__nuclear_science_pack__/graphics/nuclear-science-pack-technology.png"
+data.raw["technology"]["kovarex-enrichment-process"].icon_size = 512
 
 data.raw["technology"]["kovarex-enrichment-process"].localised_name = { "technology-name.nuclear-science-pack" }

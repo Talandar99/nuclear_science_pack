@@ -73,5 +73,5 @@ if mods["Cerys-Moon-of-Fulgora"] then
 			setting.hidden = true
 		end
 	end
-	force_setting("bool", "cerys-radiative-heaters-require-cryogenic-science", false)
+	force_setting("bool", "cerys-radiative-heaters-require-cryogenic-science", true)
 end
